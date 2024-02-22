@@ -40,8 +40,22 @@ TEST(Task2Suite, CaseArray) {
     ASSERT_EQ(arrayRingBuffer.pop(), 'd');
     ASSERT_THROW(arrayRingBuffer.pop(), Task2::RingBufferEmpty);
 }
+TEST(Task2Suite, CaseVector) {
+    Task2::VectorRingBuffer<char> vectorRingBuffer(3);
+
+    vectorRingBuffer.push('a');
+    vectorRingBuffer.push('b');
+    ASSERT_EQ(vectorRingBuffer.pop(), 'a');
+    vectorRingBuffer.push('c');
+    vectorRingBuffer.push('d');
+    ASSERT_THROW(vectorRingBuffer.push('e'), Task2::RingBufferFull);
+    ASSERT_EQ(vectorRingBuffer.pop(), 'b');
+    ASSERT_EQ(vectorRingBuffer.pop(), 'c');
+    ASSERT_EQ(vectorRingBuffer.pop(), 'd');
+    ASSERT_THROW(vectorRingBuffer.pop(), Task2::RingBufferEmpty);
+}
 TEST(Task2Suite, CaseList) {
-    Task2::ListRingBuffer<char, 3> listRingBuffer;
+    Task2::ListRingBuffer<char> listRingBuffer(3);
 
     listRingBuffer.push('a');
     listRingBuffer.push('b');
@@ -71,7 +85,6 @@ TEST(Task3Suite, CaseVector) {
         ASSERT_LE(v[i], v[i + 1]);
     }
 }
-
 TEST(Task3Suite, CaseArray) {
     int arr[]{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
 

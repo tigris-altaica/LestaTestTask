@@ -47,7 +47,6 @@ namespace Task3 {
         mergeSort(arr.subspan(0, mid));
         mergeSort(arr.subspan(mid, arr.size() - mid));
 
-
         merge(arr, mid);
     }
 }
