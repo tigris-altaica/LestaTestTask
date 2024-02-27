@@ -70,14 +70,12 @@ TEST(Task2Suite, CaseList) {
 }
 
 TEST(Task3Suite, CaseVector) {
-    const size_t n = 1'000'000;
-    std::vector<unsigned int> v;
+    constexpr size_t n = 1'000'000;
+    std::vector<unsigned int> v(n);
     std::random_device rnd;
     std::mt19937 gen(rnd());
 
-    for (int i = 0; i < n; ++i) {
-        v.push_back(gen());
-    }
+    std::ranges::generate(v, gen);
 
     Task3::mergeSort(std::span(v));
 
